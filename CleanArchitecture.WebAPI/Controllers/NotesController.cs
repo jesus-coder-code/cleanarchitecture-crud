@@ -1,4 +1,6 @@
-﻿using CleanArchitecture.Application.CQRS.Queries;
+﻿using CleanArchitecture.Application.CQRS.Commands;
+using CleanArchitecture.Application.CQRS.Queries;
+using CleanArchitecture.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,8 +36,10 @@ namespace CleanArchitecture.WebAPI.Controllers
 
         // POST api/<NotesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> Post([FromBody] CreateNoteRequest request)
         {
+            await _mediator.Send(request);
+            return Ok("esto es un post");
         }
 
         // PUT api/<NotesController>/5

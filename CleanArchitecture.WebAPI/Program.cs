@@ -1,5 +1,5 @@
+using CleanArchitecture.Application.CQRS.Commands;
 using CleanArchitecture.Application.CQRS.Queries;
-using CleanArchitecture.Application.DTOs;
 using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.Mappings;
 using CleanArchitecture.Infrastructure.ExceptionHandlers;
@@ -18,6 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<INotesRepository, NotesRepository>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddTransient<IRequestHandler<NotesRequest, IList<NotesResult>>, GetNotesQuery>();
+builder.Services.AddTransient<IRequestHandler<CreateNoteRequest>,CreateNoteCommand>();
 builder.Services.AddProblemDetails();
 builder.Services.AddMediatR(cfg =>
 {
